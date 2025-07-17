@@ -1,4 +1,4 @@
-import { env } from "@/configs/env";
+import { env } from "@/configs";
 
 export function getImageUrl(imageUrl: string): string {
   if (!imageUrl) return "";

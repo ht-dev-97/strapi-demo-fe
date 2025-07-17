@@ -1,6 +1,6 @@
 "use client";
 
-import { env } from "@/configs/env";
+import { env } from "@/configs";
 import { useMemo } from "react";
 import useSWR, { SWRConfiguration } from "swr";
 

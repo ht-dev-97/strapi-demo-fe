@@ -1,6 +1,6 @@
 "use client";
 
-import { env } from "@/configs/env";
+import { env } from "@/configs";
 import { useApi, useApiById, BaseEntity } from "../generic";
 
 // Article specific interface extending BaseEntity
