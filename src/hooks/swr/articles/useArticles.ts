@@ -1,9 +1,11 @@
 "use client";
 
+import { env } from "@/configs/env";
 import { useApi, useApiById, BaseEntity } from "../generic";
 
 // Article specific interface extending BaseEntity
 export interface Article extends BaseEntity {
+  documentId: string;
   title: string;
   description: string;
   slug: string;
@@ -14,6 +16,8 @@ export interface Article extends BaseEntity {
     name: string;
   };
 }
+
+export const ARTICLES_KEY = `${env.STRAPI_URL}/api/articles`;
 
 export const useArticles = (options = {}, configs = {}) => {
   return useApi<Article>("articles", options, configs);

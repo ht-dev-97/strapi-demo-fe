@@ -1,15 +1,35 @@
 "use client";
 
-import { useArticles } from "@/hooks/swr/articles";
+import { Button } from "@/components/ui/button";
+import { useArticles, useUpdateArticle } from "@/hooks/swr/articles";
 import { getImageUrl } from "@/utils/common";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { toast } from "sonner";
 
 const ArticlesContainer = () => {
   const { data: articles, isLoading } = useArticles();
+  const { updateArticle } = useUpdateArticle();
+
+  const handleDirectUpdate = async (id: string) => {
+    try {
+      await updateArticle({
+        id,
+        data: {
+          title: "What's inside a Black Hole",
+        },
+      });
+      toast.success("Article updated successfully!");
+    } catch (error) {
+      console.error("Failed to update article:", error);
+      toast.error("Failed to update article!");
+    }
+  };
 
   if (isLoading) return <div>Loading...</div>;
+
+  if (!articles.length) return <div>No articles found</div>;
 
   return (
     <div className="w-full">
@@ -26,7 +46,7 @@ const ArticlesContainer = () => {
                 className="size-full object-cover"
               />
             </div>
-            <div className="p-4">
+            <div className="p-4 space-y-2">
               <Link
                 href={`/articles/${article.slug}`}
                 className="text-blue-700 hover:text-blue-700/80"
@@ -34,6 +54,9 @@ const ArticlesContainer = () => {
                 <h2 className="text-2xl font-bold">{article.title}</h2>
               </Link>
               <p>{article.description}</p>
+              <Button onClick={() => handleDirectUpdate(article.documentId)}>
+                Update Article
+              </Button>
             </div>
           </div>
         ))}
