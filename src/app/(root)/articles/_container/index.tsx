@@ -16,9 +16,7 @@ const ArticlesContainer = () => {
     try {
       await updateArticle({
         id,
-        data: {
-          title: "What's inside a Black Hole",
-        },
+        data: {},
       });
       toast.success("Article updated successfully!");
     } catch (error) {

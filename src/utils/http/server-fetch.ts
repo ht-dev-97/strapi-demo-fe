@@ -1,12 +1,15 @@
 import { withRetry } from "./fetch-retry";
 import { fetchWithTimeout, handleResponse } from "./fetch-utils";
 import { DEFAULT_OPTIONS } from "./fetch-config";
-import { siteConfig } from "@/configs";
+import { env, siteConfig } from "@/configs";
 
 class ServerFetch {
   private async createAuthHeaders(requireAuth: boolean): Promise<HeadersInit> {
     if (!requireAuth) return { ...DEFAULT_OPTIONS.headers };
-    return { ...DEFAULT_OPTIONS.headers };
+    return {
+      ...DEFAULT_OPTIONS.headers,
+      Authorization: `Bearer ${env.STRAPI_API_TOKEN}`,
+    };
   }
 
   private async request<T>(

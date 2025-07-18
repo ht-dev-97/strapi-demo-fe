@@ -23,6 +23,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "s.gravatar.com",
       },
+      {
+        protocol: "https",
+        hostname: "pretty-friendship-f4c7172dd2.media.strapiapp.com",
+      },
     ],
     formats: ["image/avif", "image/webp"],
   },
